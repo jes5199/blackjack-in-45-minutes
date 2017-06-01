@@ -17,7 +17,33 @@ def score_for_card(card)
   return rank
 end
 
-p deck_of_cards.shuffle
-p deck_of_cards.map{|c| score_for_card(c) }
+def score_for_hand(hand)
+  hand.inject(0){|sc, card| sc + score_for_card(card)}
+end
 
+deck = deck_of_cards.shuffle
+player_hand = []
+dealer_hand = []
 
+2.times do
+  player_hand.push deck.pop
+  dealer_hand.push deck.pop
+end
+
+loop do
+  print "dealer's cards: "
+  p dealer_hand
+  print "score: "
+  p score_for_hand(dealer_hand)
+
+  print "your cards: "
+  p player_hand
+  print "score: "
+  p score_for_hand(player_hand)
+
+  puts
+  puts "[h]it or [s]tay?"
+  p STDIN.gets
+
+  exit
+end
