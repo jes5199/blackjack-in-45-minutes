@@ -39,11 +39,23 @@ loop do
   print "your cards: "
   p player_hand
   print "score: "
-  p score_for_hand(player_hand)
+  player_score = score_for_hand(player_hand)
+  p player_score
+
+  if player_score > 21
+    puts "BUST!"
+    break
+  end
 
   puts
   puts "[h]it or [s]tay?"
-  p STDIN.gets
+  action = STDIN.gets
 
-  exit
+  if action.match /\Ah/i
+    player_hand.push deck.pop
+  elsif action.match /\As/i
+    break
+  else
+    puts "I didn't understand you. Try again?"
+  end
 end
