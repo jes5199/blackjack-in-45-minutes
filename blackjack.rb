@@ -64,9 +64,11 @@ loop do
   if player_score == 21
     if first_round
       puts "Blackjack! You win this round!"
+      puts
       break
     end
     puts "Twenty-one!"
+    puts
     break
   end
 
@@ -96,6 +98,7 @@ while score_for_hand(player_hand) <= 21 && score_for_hand(dealer_hand) < 17
   p dealer_score
   if dealer_score > 21
     puts "BUST!"
+    puts
     break
   end
   puts
