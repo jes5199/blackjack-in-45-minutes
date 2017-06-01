@@ -59,3 +59,23 @@ loop do
     puts "I didn't understand you. Try again?"
   end
 end
+
+
+while score_for_hand(player_hand) <= 21 && score_for_hand(dealer_hand) < 17
+  puts "The dealer draws."
+  dealer_hand.push deck.pop
+  print "dealer's cards: "
+  p dealer_hand
+  print "score: "
+  dealer_score = score_for_hand(dealer_hand)
+  p dealer_score
+  puts
+  if dealer_score > 21
+    puts "BUST!"
+    break
+  end
+end
+
+
+
+
