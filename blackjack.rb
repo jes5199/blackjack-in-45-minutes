@@ -30,22 +30,47 @@ dealer_hand = []
   dealer_hand.push deck.pop
 end
 
-loop do
+first_round = true
+
+print_dealer_cards = lambda do
   print "dealer's cards: "
   p dealer_hand
   print "score: "
   p score_for_hand(dealer_hand)
+end
 
+print_player_cards = lambda do
   print "your cards: "
   p player_hand
   print "score: "
+  p score_for_hand(player_hand)
+end
+
+print_cards = lambda do
+  print_dealer_cards.call
+  print_player_cards.call
+end
+
+loop do
+  print_cards.call
+
   player_score = score_for_hand(player_hand)
-  p player_score
 
   if player_score > 21
     puts "BUST!"
     break
   end
+
+  if player_score == 21
+    if first_round
+      puts "Blackjack! You win this round!"
+      break
+    end
+    puts "Twenty-one!"
+    break
+  end
+
+  first_round = false
 
   puts
   puts "[h]it or [s]tay?"
@@ -69,13 +94,25 @@ while score_for_hand(player_hand) <= 21 && score_for_hand(dealer_hand) < 17
   print "score: "
   dealer_score = score_for_hand(dealer_hand)
   p dealer_score
-  puts
   if dealer_score > 21
     puts "BUST!"
     break
   end
+  puts
 end
 
+print_cards.call
 
-
-
+dealer_score = score_for_hand(dealer_hand)
+player_score = score_for_hand(player_hand)
+if score_for_hand(player_hand) > 21
+  puts "You busted. Better luck next time!"
+elsif score_for_hand(dealer_hand) > 21
+  puts "Dealer busted! You win this round."
+elsif score_for_hand(dealer_hand) > score_for_hand(player_hand)
+  puts "Dealer beat you."
+elsif score_for_hand(dealer_hand) == score_for_hand(player_hand)
+  puts "Tied score."
+else
+  puts "You win this round!"
+end
